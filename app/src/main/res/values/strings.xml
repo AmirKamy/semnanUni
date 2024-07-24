@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Semnan University</string>
+    <string name="virtual_tour_semnan">تور مجازی دانشگاه</string>
+    <string name="intro_semnan">معرفی اجمالی دانشگاه سمنان</string>
+    <string name="intro_semnan_city">آشنایی با شهر سمنان</string>
+    <string name="daneshkade_ha">دانشکده ها</string>
+    <string name="moavenat_ha">معاونت ها</string>
+    <string name="ostad_ha">اساتید دانشگاه</string>
+    <string name="majors">رشته های تحصیلی</string>
+    <string name="phones">شماره های دانشگاه</string>
+    <string name="achievement">دستاورد های دانشگاه</string>
+    <string name="news">اخبار دانشگاه</string>
+    <string name="pardis_map">نقشه پردیس دانشگاه</string>
+    <string name="city_map">نقشه شهر سمنان</string>
+    <string name="my">my ورود به سامانه</string>
+    <string name="simorgh">سامانه امانت کتاب</string>
+</resources>
