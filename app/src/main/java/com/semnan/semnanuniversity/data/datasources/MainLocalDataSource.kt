@@ -22,9 +22,7 @@ class MainLocalDataSource @Inject constructor(@ApplicationContext private val mC
             MainItems("dastavard", R.drawable.achiv, mContext.getString(R.string.achievement)),
             MainItems("pardis_map", R.drawable.pardis_logo, mContext.getString(R.string.pardis_map)),
             MainItems("city_map", R.drawable.city_map, mContext.getString(R.string.city_map)),
-            MainItems("my", R.drawable.lms, mContext.getString(R.string.my)),
             MainItems("book", R.drawable.simorgh, mContext.getString(R.string.simorgh))
-
         )
     }
 

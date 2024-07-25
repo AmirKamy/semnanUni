@@ -25,7 +25,7 @@ import com.google.accompanist.web.rememberWebViewState
 fun WebViewScreen(navController: NavController, url: String?) {
 
     val state = rememberWebViewState(url.toString())
-    var webView by remember { mutableStateOf<android.webkit.WebView?>(null) }
+    var webView by remember { mutableStateOf<WebView?>(null) }
 
     WebView(
         state = state,
