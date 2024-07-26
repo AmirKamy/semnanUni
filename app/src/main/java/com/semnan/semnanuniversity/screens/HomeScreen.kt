@@ -3,12 +3,18 @@ package com.semnan.semnanuniversity.screens
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.semnan.semnanuniversity.R
 import com.semnan.semnanuniversity.components.ImageCard
@@ -85,17 +93,36 @@ private fun HomeTopAppBar(
     TopAppBar(
         title = {
             Row(
-                Modifier.fillMaxWidth().padding(end = 10.dp, start = 10.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(end = 2.dp, bottom = 4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.lms),
-                    contentDescription = "My",
-                    modifier = Modifier.clickable {
-                        goToWebViewScreen("https://my.semnan.ac.ir/", onMainItemClick)
-                    }
-                )
+
+                Button(onClick = { goToWebViewScreen("https://my.semnan.ac.ir/", onMainItemClick) },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                    contentPadding = PaddingValues(
+                        start = 10.dp,
+                        top = 0.dp,
+                        end = 10.dp,
+                        bottom = 0.dp
+                    ),
+                    modifier = Modifier.padding(top = 2.dp)
+                ) {
+                    Text(text = "ورود به سامانه مای", modifier = Modifier, style = TextStyle(color = MaterialTheme.colorScheme.onPrimary, fontSize = 12.sp))
+                    Icon(
+                        painter = painterResource(id = R.drawable.profile),
+                        contentDescription = "My",
+                        modifier = Modifier
+                            .width(20.dp)
+                            .height(20.dp)
+                            .clickable {
+                                goToWebViewScreen("https://my.semnan.ac.ir/", onMainItemClick)
+                            }
+                    )
+                }
+                
 
                 Text(
                     modifier = Modifier.padding(10.dp),
@@ -154,6 +181,18 @@ fun navigateToNewPage(itemId: String, onItemClick: (String) -> Unit) {
         "book" -> {
             goToWebViewScreen("https://simorgh.semnan.ac.ir/", onItemClick)
         }
+        "intro_to_semnan_uni" -> {
+            goToWebViewScreen("https://semnan.ac.ir/history", onItemClick)
+        }
+        "intro_to_semnan_city" -> {
+            goToWebViewScreen("https://semnan.ac.ir/%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D8%B4%D9%87%D8%B1-%D8%B3%D9%85%D9%86%D8%A7%D9%86", onItemClick)
+        }
+        "daneshkade_ha" -> {
+            onItemClick(Screen.FacultiesScreen.route)
+        }
+
+
+
     }
 }
 

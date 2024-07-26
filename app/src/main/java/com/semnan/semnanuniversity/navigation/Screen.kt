@@ -21,4 +21,16 @@ sealed class Screen(
         fun createRoute(url: String) = "webviewscreen/${url}"
     }
 
+
+    data object FacultyScreen : Screen(
+        route = "faculty_screen/{faculty}",
+        navArguments = listOf(navArgument("faculty") {
+            type = NavType.StringType
+        })
+    ) {
+        fun createRoute(faculty: String) = "faculty_screen/${faculty}"
+    }
+
+    data object FacultiesScreen : Screen("faculties_screen")
+
 }

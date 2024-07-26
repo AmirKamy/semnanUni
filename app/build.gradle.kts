@@ -75,7 +75,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     kapt (libs.hilt.compiler)
     implementation(libs.androidx.compose.material3)
-    implementation ("com.google.accompanist:accompanist-webview:0.28.0")
+    implementation (libs.accompanist.webview)
+    implementation (libs.gson)
 }
 
 kapt {
