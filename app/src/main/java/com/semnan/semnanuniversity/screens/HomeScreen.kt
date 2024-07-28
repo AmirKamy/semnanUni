@@ -196,7 +196,7 @@ fun navigateToNewPage(itemId: String, onItemClick: (String) -> Unit) {
     }
 }
 
-fun goToWebViewScreen(url: String, onItemClick: (String) -> Unit){
+private fun goToWebViewScreen(url: String, onItemClick: (String) -> Unit){
     val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
     onItemClick(Screen.WebViewScreen.createRoute(encodedUrl))
 }

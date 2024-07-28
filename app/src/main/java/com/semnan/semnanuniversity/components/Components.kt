@@ -21,19 +21,13 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.gson.Gson
-import com.semnan.semnanuniversity.R
 import com.semnan.semnanuniversity.data.model.Faculty
 import com.semnan.semnanuniversity.data.model.MainItems
-import com.semnan.semnanuniversity.ui.theme.SemnanUniversityTheme
-import com.semnan.semnanuniversity.viewmodel.MainViewModel
 
 @Composable
 fun ImageCard(
@@ -77,11 +71,14 @@ fun ImageCard(
 }
 
 @Composable
-fun FacultyCard(modifier: Modifier = Modifier,item: Faculty, onItemClick: (String) -> Unit) {
+fun FacultyCard(modifier: Modifier = Modifier,item: Faculty?, onItemClick: (String) -> Unit) {
+
+    if (item == null) return
+
     Card(modifier = modifier
         .padding(12.dp)
         .clickable {
-            onItemClick(Gson().toJson(item))
+            onItemClick(item.id)
         }
         .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -115,6 +112,6 @@ fun FacultyCard(modifier: Modifier = Modifier,item: Faculty, onItemClick: (Strin
 @Preview(showBackground = true)
 @Composable
 fun ImageCardPreview() {
-    FacultyCard(item = Faculty("و برقدانشکده مهندسی کامپیوتر ", "", 5, "", "", "")) {
+    FacultyCard(item = Faculty("1","و برقدانشکده مهندسی کامپیوتر ", "", 5, "", "", "")) {
     }
 }

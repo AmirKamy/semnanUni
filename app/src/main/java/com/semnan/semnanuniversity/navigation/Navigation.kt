@@ -6,7 +6,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.semnan.semnanuniversity.screens.FacultiesScreen
 import com.semnan.semnanuniversity.screens.FacultyScreen
 import com.semnan.semnanuniversity.screens.HomeScreen
@@ -39,15 +38,15 @@ fun Navigation(){
         composable(Screen.FacultyScreen.route,
             arguments = Screen.FacultyScreen.navArguments){
             backStackEntry ->
-
-            FacultyScreen(jsonFaculty = backStackEntry.arguments?.getString("faculty"))
+            FacultyScreen(faculty = backStackEntry.arguments?.getString("faculty")){ route ->
+                navController.navigate(route)
+            }
         }
 
         composable(Screen.FacultiesScreen.route){
             //here we pass where this should lead us to
             FacultiesScreen { faculty ->
-                val encodedFaculty = URLEncoder.encode(faculty, StandardCharsets.UTF_8.toString())
-                navController.navigate(Screen.FacultyScreen.createRoute(encodedFaculty))
+                navController.navigate(Screen.FacultyScreen.createRoute(faculty))
             }
         }
 
