@@ -13,7 +13,6 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
 
     val mainItems = MutableStateFlow<List<MainItems>>(emptyList())
     val facultyItems = MutableStateFlow<List<Faculty>>(emptyList())
-    val faculty = MutableStateFlow<Faculty?>(null)
 
     fun getMainItems() {
         mainItems.value = mainRepository.getMainItems()
@@ -21,6 +20,10 @@ class MainViewModel @Inject constructor(private val mainRepository: MainReposito
 
     fun getFacultyItems(){
         facultyItems.value = mainRepository.getFacultyItems()
+    }
+
+    fun getMoavenatItems() {
+        facultyItems.value = mainRepository.getMoavenatItems()
     }
 
 }

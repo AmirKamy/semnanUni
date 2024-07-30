@@ -71,14 +71,19 @@ fun ImageCard(
 }
 
 @Composable
-fun FacultyCard(modifier: Modifier = Modifier,item: Faculty?, onItemClick: (String) -> Unit) {
+fun FacultyCard(
+    modifier: Modifier = Modifier,
+    item: Faculty?,
+    comeFrom: String,
+    onItemClick: (String, String) -> Unit,
+) {
 
     if (item == null) return
 
     Card(modifier = modifier
         .padding(12.dp)
         .clickable {
-            onItemClick(item.id)
+            onItemClick(item.id, comeFrom)
         }
         .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
@@ -112,6 +117,5 @@ fun FacultyCard(modifier: Modifier = Modifier,item: Faculty?, onItemClick: (Stri
 @Preview(showBackground = true)
 @Composable
 fun ImageCardPreview() {
-    FacultyCard(item = Faculty("1","و برقدانشکده مهندسی کامپیوتر ", "", 5, "", "", "")) {
-    }
+
 }

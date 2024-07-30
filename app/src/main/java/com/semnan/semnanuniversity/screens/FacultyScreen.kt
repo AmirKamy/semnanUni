@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.semnan.semnanuniversity.R
+import com.semnan.semnanuniversity.common.MainItemsEnum
 import com.semnan.semnanuniversity.components.FacultyCard
 import com.semnan.semnanuniversity.data.model.Faculty
 import com.semnan.semnanuniversity.navigation.Screen
@@ -43,22 +44,32 @@ import java.nio.charset.StandardCharsets
 @Composable
 fun FacultyScreen(
     modifier: Modifier = Modifier,
+    comeFrom: String?,
     viewModel: MainViewModel = hiltViewModel(),
     faculty: String? = null,
     onUrlClicked: (String) -> Unit
 ) {
+    if (comeFrom == null) return
 
     val scrollState = rememberScrollState()
-    viewModel.getFacultyItems()
+
+    if (comeFrom == MainItemsEnum.DaneshkadeHa.name) {
+        viewModel.getFacultyItems()
+    } else if (comeFrom == MainItemsEnum.MoavenatHa.name) {
+        viewModel.getMoavenatItems()
+    }
+
     val faculties = viewModel.facultyItems.collectAsState().value
     val mainItem = faculties.filter { thisFaculty ->
         thisFaculty.id == faculty
     }
 
     Column {
-        FacultyCard(item = mainItem[0], modifier = Modifier.padding(top = 40.dp)) {}
+        FacultyCard(item = mainItem[0], modifier = Modifier.padding(top = 40.dp), comeFrom = "") {_ , _ ->}
 
-        Box(modifier = Modifier.verticalScroll(scrollState).weight(1f)){
+        Box(modifier = Modifier
+            .verticalScroll(scrollState)
+            .weight(1f)) {
             Text(
                 text = mainItem[0].body,
                 style = MaterialTheme.typography.bodyMedium.copy(textDirection = TextDirection.Rtl),
@@ -67,7 +78,6 @@ fun FacultyScreen(
             )
 
         }
-
 
         BottomContent(item = mainItem[0], onUrlClicked = onUrlClicked)
 
@@ -126,9 +136,9 @@ fun BottomContent(modifier: Modifier = Modifier, item: Faculty, onUrlClicked: (S
         }
         Button(
             onClick = {
-          //      uriHandler.openUri(item.map)
+                //      uriHandler.openUri(item.map)
                 navigateToWebView(item.map, onUrlClicked)
-                      },
+            },
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(
                 start = 10.dp,

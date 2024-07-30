@@ -10,4 +10,6 @@ class MainRepositoryImpl @Inject constructor(private val localDataSource: MainLo
 
     override fun getFacultyItems() = localDataSource.getFacultyItems()
 
+    override fun getMoavenatItems() = localDataSource.getMoavenatItems()
+
 }

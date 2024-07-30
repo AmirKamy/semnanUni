@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.semnan.semnanuniversity.R
+import com.semnan.semnanuniversity.common.MainItemsEnum
 import com.semnan.semnanuniversity.components.ImageCard
 import com.semnan.semnanuniversity.navigation.Screen
 import com.semnan.semnanuniversity.viewmodel.MainViewModel
@@ -160,35 +160,44 @@ fun MyGrid(
 
 fun navigateToNewPage(itemId: String, onItemClick: (String) -> Unit) {
     when (itemId) {
-        "ostad_ha" -> {
+        MainItemsEnum.OstadHa.name -> {
             goToWebViewScreen("https://profile.semnan.ac.ir/", onItemClick)
         }
-        "tour" -> {
+        MainItemsEnum.Tour.name -> {
             goToWebViewScreen("https://semnan.ac.ir/uploads/1/2019/tour/index.html", onItemClick)
         }
-        "reshte_ha" -> {
+        MainItemsEnum.ReshteHa.name -> {
             goToWebViewScreen("https://liststudyfields.semnan.ac.ir/", onItemClick)
         }
-        "news" -> {
+        MainItemsEnum.News.name -> {
             goToWebViewScreen("https://semnan.ac.ir/%D9%87%D9%85%D9%87-%D8%A7%D8%AE%D8%A8%D8%A7%D8%B1", onItemClick)
         }
-        "shmare_ha" -> {
+        MainItemsEnum.ShomareHa.name -> {
             goToWebViewScreen("https://118.semnan.ac.ir/", onItemClick)
         }
-        "dastavard" -> {
+        MainItemsEnum.Dastavard.name -> {
             goToWebViewScreen("https://semnan.ac.ir/%D8%A7%D9%81%D8%AA%D8%AE%D8%A7%D8%B1%D8%A7%D8%AA-%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87", onItemClick)
         }
-        "book" -> {
+        MainItemsEnum.Simorgh.name -> {
             goToWebViewScreen("https://simorgh.semnan.ac.ir/", onItemClick)
         }
-        "intro_to_semnan_uni" -> {
+        MainItemsEnum.IntroSemnanUni.name -> {
             goToWebViewScreen("https://semnan.ac.ir/history", onItemClick)
         }
-        "intro_to_semnan_city" -> {
+        MainItemsEnum.IntroSemnanCity.name -> {
             goToWebViewScreen("https://semnan.ac.ir/%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D8%B4%D9%87%D8%B1-%D8%B3%D9%85%D9%86%D8%A7%D9%86", onItemClick)
         }
-        "daneshkade_ha" -> {
-            onItemClick(Screen.FacultiesScreen.route)
+        MainItemsEnum.DaneshkadeHa.name -> {
+            onItemClick(Screen.FacultiesScreen.createRoute(MainItemsEnum.DaneshkadeHa.name))
+        }
+        MainItemsEnum.MoavenatHa.name -> {
+            onItemClick(Screen.FacultiesScreen.createRoute(MainItemsEnum.MoavenatHa.name))
+        }
+        MainItemsEnum.PardisMap.name -> {
+            onItemClick(Screen.MapScreen.createRoute(R.drawable.pardis_map_full))
+        }
+        MainItemsEnum.CityMap.name-> {
+            onItemClick(Screen.MapScreen.createRoute(R.drawable.city_map_full))
         }
 
 

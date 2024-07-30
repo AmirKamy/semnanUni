@@ -9,4 +9,6 @@ interface MainRepository {
 
     fun getFacultyItems(): List<Faculty>
 
+    fun getMoavenatItems(): List<Faculty>
+
 }
