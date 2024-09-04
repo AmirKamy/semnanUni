@@ -173,7 +173,7 @@ fun navigateToNewPage(itemId: String, onItemClick: (String) -> Unit) {
             goToWebViewScreen("https://semnan.ac.ir/%D9%87%D9%85%D9%87-%D8%A7%D8%AE%D8%A8%D8%A7%D8%B1", onItemClick)
         }
         MainItemsEnum.ShomareHa.name -> {
-            goToWebViewScreen("https://118.semnan.ac.ir/", onItemClick)
+            onItemClick(Screen.NumberScreen.createRoute())
         }
         MainItemsEnum.Dastavard.name -> {
             goToWebViewScreen("https://semnan.ac.ir/%D8%A7%D9%81%D8%AA%D8%AE%D8%A7%D8%B1%D8%A7%D8%AA-%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87", onItemClick)

@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.semnan.semnanuniversity.data.model.Faculty
 import com.semnan.semnanuniversity.data.model.MainItems
+import com.semnan.semnanuniversity.data.model.Number
 
 @Composable
 fun ImageCard(
@@ -111,6 +112,11 @@ fun FacultyCard(
             )
         }
     }
+}
+
+@Composable
+fun NumberCard(number: Number) {
+
 }
 
 

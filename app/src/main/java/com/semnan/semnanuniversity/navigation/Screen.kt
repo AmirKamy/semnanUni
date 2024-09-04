@@ -26,13 +26,13 @@ sealed class Screen(
         route = "faculty_screen/{faculty}/{come_from}",
         navArguments = listOf(navArgument("faculty") {
             type = NavType.StringType
-        }, navArgument("come_from"){
+        }, navArgument("come_from") {
             type = NavType.StringType
         }
-        /*
-       This argument specifies that we should load items related to faculties or MoavenatHa.
-       pass MainItemEnums.Faculties.name for Faculty Screen or MainItemEnums.MoavenatHa.name for MoavenatHa
-         */
+            /*
+           This argument specifies that we should load items related to faculties or MoavenatHa.
+           pass MainItemEnums.Faculties.name for Faculty Screen or MainItemEnums.MoavenatHa.name for MoavenatHa
+             */
         )
     ) {
         fun createRoute(faculty: String, comeFrom: String) = "faculty_screen/${faculty}/${comeFrom}"
@@ -55,5 +55,10 @@ sealed class Screen(
     ) {
         fun createRoute(imageId: Int) = "map_screen/${imageId}"
     }
+
+    data object NumberScreen : Screen(route = "number_screen"){
+        fun createRoute() = "number_screen"
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.semnan.semnanuniversity.screens
 
 import android.annotation.SuppressLint
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Box
@@ -33,6 +34,8 @@ fun WebViewScreen(navController: NavController, url: String?) {
         onCreated = {
             webView = it // Capture the WebView instance
             it.settings.javaScriptEnabled = true
+            it.webChromeClient = WebChromeClient()
+            it.webViewClient = WebViewClient()
         }
     )
 

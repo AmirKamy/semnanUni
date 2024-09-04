@@ -78,6 +78,11 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation (libs.accompanist.webview)
     implementation (libs.gson)
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation(libs.kotlinx.coroutines.android)
 }
 
 kapt {
