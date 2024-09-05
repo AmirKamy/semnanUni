@@ -29,4 +29,5 @@
     <string name="website_address">وبسایت</string>
     <string name="phone_number">تلفن</string>
     <string name="map_address">موقعیت</string>
+    <string name="numbers">شماره ها</string>
 </resources>

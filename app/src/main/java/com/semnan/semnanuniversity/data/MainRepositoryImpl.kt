@@ -20,8 +20,4 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun getMoavenatItems() = localDataSource.getMoavenatItems()
 
-    override suspend fun getNumbers(): Resource<List<Number>> = withContext(Dispatchers.IO) {
-        safeApiCall { remoteDataSource.getNumbers() }
-    }
-
 }

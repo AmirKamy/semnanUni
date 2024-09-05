@@ -83,6 +83,8 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation(libs.kotlinx.coroutines.android)
+    implementation("androidx.paging:paging-runtime:3.3.2")
+    implementation("androidx.paging:paging-compose:3.3.2")
 }
 
 kapt {

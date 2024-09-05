@@ -14,10 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.semnan.semnanuniversity.data.model.Faculty
 import com.semnan.semnanuniversity.data.model.MainItems
 import com.semnan.semnanuniversity.data.model.Number
+import com.semnan.semnanuniversity.data.model.NumberFilters
 
 @Composable
 fun ImageCard(
@@ -116,6 +119,23 @@ fun FacultyCard(
 
 @Composable
 fun NumberCard(number: Number) {
+    Text(text = number.job_name.toString(), modifier = Modifier.padding(top = 30.dp, bottom= 30.dp))
+}
+
+@Composable
+fun FilterWidget(
+    query: NumberFilters, // is it work when we pass a object?
+    onJobNameChanged: (String) -> Unit,
+    onSubunitChanged: (String) -> Unit,
+    onNumberChanged: (String) -> Unit,
+    onAddressChanged: (String) -> Unit,
+    modifier: Modifier = Modifier
+){
+    Column {
+        Button(onClick = { onJobNameChanged("کارشناس فناوری") }, content = {})
+        Button(onClick = { onNumberChanged("31539500") }, content = {})
+        Button(onClick = { onNumberChanged("") }, content = {})
+    }
 
 }
 
@@ -123,5 +143,5 @@ fun NumberCard(number: Number) {
 @Preview(showBackground = true)
 @Composable
 fun ImageCardPreview() {
-
+    NumberCard(number = Number("معاونت آموزشی","پردیس 1","این یک دیسکرایب است","35139652","25125485","555", addresses = "پزدیس 1"))
 }

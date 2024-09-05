@@ -9,7 +9,4 @@ import javax.inject.Inject
 
 class MainRemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun getNumbers(): List<Number> = withContext(Dispatchers.IO) {
-        apiService.getNumbers()
-    }
 }

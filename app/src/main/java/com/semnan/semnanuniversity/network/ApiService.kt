@@ -5,12 +5,20 @@ import com.semnan.semnanuniversity.data.model.Number
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
 
 
     @GET("people")
-    suspend fun getNumbers(): List<Number>
+    suspend fun getNumbers(
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int,
+        @Query("job_name") job_name: String? = null,
+        @Query("subunit") subunit: String? = null,
+        @Query("number") number: String? = null,
+        @Query("address") address: String? = null,
+    ): List<Number>
 
 
 

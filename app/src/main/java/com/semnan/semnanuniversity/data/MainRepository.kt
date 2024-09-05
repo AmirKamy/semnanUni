@@ -14,6 +14,5 @@ interface MainRepository: BaseRepository {
 
     fun getMoavenatItems(): List<Faculty>
 
-    suspend fun getNumbers(): Resource<List<Number>>
 
 }
