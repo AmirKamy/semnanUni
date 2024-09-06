@@ -1,5 +1,6 @@
 package com.semnan.semnanuniversity.screens
 
+import android.widget.ProgressBar
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -9,11 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,13 +24,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -37,14 +35,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemKey
 import com.semnan.semnanuniversity.R
-import com.semnan.semnanuniversity.components.FacultyCard
-import com.semnan.semnanuniversity.components.FilterWidget
+import com.semnan.semnanuniversity.components.SearchBox
 import com.semnan.semnanuniversity.components.NumberCard
 import com.semnan.semnanuniversity.data.model.Number
-import com.semnan.semnanuniversity.data.model.NumberFilters
-import com.semnan.semnanuniversity.network.Resource
 import com.semnan.semnanuniversity.viewmodel.MainViewModel
 import retrofit2.HttpException
 import java.io.IOException
@@ -79,7 +73,10 @@ fun NumbersScreen(
                             viewModel.toggleIsSearchShowing()
                         },
                     ) {
-                        Icon(Icons.Default.Search, contentDescription = "Search products")
+                        if (isFilterVisible)
+                            Icon(Icons.Default.Clear, contentDescription = "Clear search")
+                        else
+                            Icon(Icons.Default.Search, contentDescription = "Search products")
                     }
                 },
                 scrollBehavior = scrollBehavior,
@@ -87,49 +84,77 @@ fun NumbersScreen(
         }
     ) { paddingValues ->
 
-        Box(
+        Column(
             modifier = Modifier.padding(paddingValues)
         ) {
 
-            when (numbers.loadState.refresh) {
-                LoadState.Loading -> {
+            AnimatedVisibility(visible = isFilterVisible) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = 6.dp)
+                ) {
+                    SearchBox(
+                        jobNameQuery,
+                        onValueChanged = { viewModel.setJobNameQuery(it) },
+                        isFilterVisible = isFilterVisible,
+                        label = "جستجو بر اساس نام شغل",
+                        placeholder = "کارشناس فناوری اطلاعات"
+                    )
+                    SearchBox(
+                        subunitQuery,
+                        onValueChanged = { viewModel.setSubunitQuery(it) },
+                        isFilterVisible = isFilterVisible,
+                        label = "جستجو بر اساس نام زیر واحد",
+                        placeholder = "کارشناس فناوری اطلاعات"
+                    )
+                    SearchBox(
+                        numberQuery,
+                        onValueChanged = { viewModel.setNumberQuery(it) },
+                        isFilterVisible = isFilterVisible,
+                        label = "جستجو بر اساس شماره",
+                        placeholder = "35566006"
+                    )
+                    SearchBox(
+                        addressQuery,
+                        onValueChanged = { viewModel.setAddressQuery(it) },
+                        isFilterVisible = isFilterVisible,
+                        label = "جستجو بر اساس آدرس",
+                        placeholder = "پردیس 1"
+                    )
+                }
+            }
 
+            if (numbers.loadState.append is LoadState.Loading){
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+                    CircularProgressIndicator()
+                }
+            }
+
+            when {
+                numbers.loadState.refresh is LoadState.Loading -> {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        CircularProgressIndicator()
+                    }
                 }
 
-                is LoadState.Error -> {
+                numbers.loadState.refresh is LoadState.Error -> {
                     val error = (numbers.loadState.refresh as LoadState.Error).error
                     HandleError(error = error, numbers = numbers)
                 }
 
                 else -> {
-
-                    Column {
-                        AnimatedVisibility(visible = isFilterVisible) {
-                            FilterWidget(
-                                NumberFilters(
-                                    jobNameQuery,
-                                    subunitQuery,
-                                    numberQuery,
-                                    addressQuery
-                                ),
-                                onJobNameChanged = { viewModel.setJobNameQuery(it) },
-                                onSubunitChanged = { viewModel.setSubunitQuery(it) },
-                                onNumberChanged = { viewModel.setNumberQuery(it) },
-                                onAddressChanged = { viewModel.setAddressQuery(it) }
-                            )
-                        }
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            horizontalAlignment = Alignment.Start,
-                            verticalArrangement = Arrangement.Top,
-                        ) {
-                            items(count = numbers.itemCount) { index ->
-                                val number: Number = numbers[index] ?: return@items
-                                NumberCard(number)
-                            }
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.Top,
+                    ) {
+                        items(count = numbers.itemCount) { index ->
+                            val number: Number = numbers[index] ?: return@items
+                            NumberCard(number)
                         }
                     }
-
 
                 }
             }

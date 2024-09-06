@@ -30,4 +30,12 @@
     <string name="phone_number">تلفن</string>
     <string name="map_address">موقعیت</string>
     <string name="numbers">شماره ها</string>
+    <string name="job_name">نام واحد</string>
+    <string name="subunit">زیرواحد</string>
+    <string name="show_more">نمایش بیشتر</string>
+    <string name="internal_numbers">شماره های داخلی</string>
+    <string name="fax">فکس</string>
+    <string name="describtion">توضیحات</string>
+    <string name="address">آدرس</string>
+    <string name="show_less">نمایش کمتر</string>
 </resources>
