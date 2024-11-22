@@ -33,7 +33,7 @@ This project is an Android application designed to provide students and interest
 ## Preview
 | Home Page | Faculty List | Contact Numbers | Login Page |
 |-----------|--------------|-----------------|------------|
-| ![Home Page](assets/main_picture) | ![Faculty List](assets/faculties) | ![Contact Numbers](assets/phone_numbers) | ![Login Page](assets/login) |
+| ![Home Page](assets/main_picture.jpg) | ![Faculty List](assets/faculties.jpg) | ![Contact Numbers](assets/phone_numbers.jpg) | ![Login Page](assets/login.jpg) |
 
 ---
 
